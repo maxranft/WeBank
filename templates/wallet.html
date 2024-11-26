@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Wallet - WeBank{% endblock %}
+
+{% block content %}
+<section class="wallet">
+    <div class="container">
+        <h2>Your Crypto Wallet</h2>
+        <p>Effortlessly manage and track your crypto portfolio.</p>
+
+        <div class="wallet-summary">
+            <h3>Balance:</h3>
+            <ul>
+                {% for coin in wallet_balances %}
+                <li><span class="coin-name">{{ coin.name }} ({{ coin.symbol }}):</span> <span class="coin-amount">{{ coin.amount }}</span></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="wallet-actions">
+            <button class="btn btn-primary" onclick="window.location.href='/deposit'">Deposit</button>
+            <button class="btn btn-secondary" onclick="window.location.href='/withdraw'">Withdraw</button>
+        </div>
+    </div>
+</section>
+{% endblock %}

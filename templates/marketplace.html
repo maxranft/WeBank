@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}NFT Marketplace - WeBank{% endblock %}
+
+{% block content %}
+<section class="marketplace">
+    <div class="container">
+        <h2>Exclusive NFT Marketplace</h2>
+        <p>Explore, buy, and sell the most unique digital assets.</p>
+
+        <div class="nft-grid">
+            {% for nft in nft_list %}
+            <div class="nft-item">
+                <img src="{{ nft.image_url }}" alt="{{ nft.title }}" loading="lazy" class="nft-img">
+                <h3>{{ nft.title }}</h3>
+                <p class="nft-price">{{ nft.price }} ETH</p>
+                <button class="btn btn-primary" onclick="window.location.href='/buy/{{ nft.id }}'">Buy Now</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

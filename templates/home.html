@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Home - WeBank{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h2>Welcome to WeBank</h2>
+        <p>Your gateway to NFTs and cryptocurrencies, made easy and secure.</p>
+        <div class="cta-buttons">
+            <a href="/signup" class="btn btn-primary">Get Started</a>
+            <a href="/marketplace" class="btn btn-secondary">Explore Marketplace</a>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-item">
+                <h3>Secure Wallet</h3>
+                <p>Manage your assets with top-tier security and user-friendliness.</p>
+            </div>
+            <div class="feature-item">
+                <h3>NFT Marketplace</h3>
+                <p>Trade NFTs with ease on a seamless platform.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Real-Time Tracking</h3>
+                <p>Track cryptocurrency prices in real time, wherever you are.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
