@@ -25,28 +25,10 @@ def marketplace():
     nft_list = NFT.query.all()  # Fetch all NFTs
     return render_template('marketplace.html', nft_list=nft_list)
 
-# Route for Wallet
-@app.route('/wallet')
-def wallet():
-    from models import Wallet  # Importing inside route
-    user = Wallet.query.first()  # Assuming we have a Wallet model for users
-    wallet_balances = [
-        {"name": "Bitcoin", "symbol": "BTC", "amount": user.bitcoin_balance},
-        {"name": "Ethereum", "symbol": "ETH", "amount": user.ethereum_balance},
-        {"name": "USDC", "symbol": "USDC", "amount": user.usdc_balance},
-    ]
-    return render_template('wallet.html', wallet_balances=wallet_balances)
 
 # Route for Login
 @app.route('/login')
 def login():
     return render_template('login.html')
 
-# Route for Signup
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
-
-# Run the app
-if __name__ == "__main__":
-    app.run(debug=True)
+return app
