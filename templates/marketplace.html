@@ -1,23 +1,22 @@
-{% extends "base.html" %}
-
-{% block title %}NFT Marketplace - WeBank{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
 <section class="marketplace">
-    <div class="container">
-        <h2>Exclusive NFT Marketplace</h2>
-        <p>Explore, buy, and sell the most unique digital assets.</p>
-
-        <div class="nft-grid">
-            {% for nft in nft_list %}
-            <div class="nft-item">
-                <img src="{{ nft.image_url }}" alt="{{ nft.title }}" loading="lazy" class="nft-img">
-                <h3>{{ nft.title }}</h3>
-                <p class="nft-price">{{ nft.price }} ETH</p>
-                <button class="btn btn-primary" onclick="window.location.href='/buy/{{ nft.id }}'">Buy Now</button>
+    <h1 class="section-title">Explore NFTs</h1>
+    <div class="cards-container">
+        {% for item in nft_items %}
+        <div class="card">
+            <img src="{{ item.image }}" alt="{{ item.title }}" class="card-img">
+            <div class="card-body">
+                <h2 class="card-title">{{ item.title }}</h2>
+                <p class="card-description">{{ item.description }}</p>
+                <div class="card-footer">
+                    <span class="price">${{ item.price }}</span>
+                    <a href="{{ url_for('marketplace') }}" class="button view-btn">View Item</a>
+                </div>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

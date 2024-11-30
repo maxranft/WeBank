@@ -1,26 +1,22 @@
-{% extends "base.html" %}
-
-{% block title %}Wallet - WeBank{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
 <section class="wallet">
-    <div class="container">
-        <h2>Your Crypto Wallet</h2>
-        <p>Effortlessly manage and track your crypto portfolio.</p>
-
-        <div class="wallet-summary">
-            <h3>Balance:</h3>
-            <ul>
-                {% for coin in wallet_balances %}
-                <li><span class="coin-name">{{ coin.name }} ({{ coin.symbol }}):</span> <span class="coin-amount">{{ coin.amount }}</span></li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="wallet-actions">
-            <button class="btn btn-primary" onclick="window.location.href='/deposit'">Deposit</button>
-            <button class="btn btn-secondary" onclick="window.location.href='/withdraw'">Withdraw</button>
-        </div>
+    <h1 class="section-title">My Crypto Wallet</h1>
+    <div class="wallet-summary">
+        <p>Balance: <strong>{{ user_balance }} BTC</strong></p>
+        <a href="{{ url_for('wallet') }}" class="button">Deposit Funds</a>
+        <a href="{{ url_for('wallet') }}" class="button">Withdraw Funds</a>
+    </div>
+    <div class="transaction-history">
+        <h2>Recent Transactions</h2>
+        <ul>
+            {% for transaction in transactions %}
+            <li class="transaction">
+                <span>{{ transaction.date }}</span> - <span>{{ transaction.amount }} BTC</span> - <span>{{ transaction.status }}</span>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 </section>
 {% endblock %}

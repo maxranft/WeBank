@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="auth">
+    <h1 class="section-title">Login to WeBank</h1>
+    <form action="{{ url_for('login') }}" method="POST" class="login-form">
+        <label for="email" class="floating-label">Email</label>
+        <input type="email" name="email" id="email" required placeholder="Email" class="form-input">
+
+        <label for="password" class="floating-label">Password</label>
+        <input type="password" name="password" id="password" required placeholder="Password" class="form-input">
+
+        <button type="submit" class="button login-btn">Login</button>
+    </form>
+    <p>Don't have an account? <a href="{{ url_for('signup') }}" class="signup-link">Sign up here</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="auth">
+    <h1 class="section-title">Create an Account</h1>
+    <form action="{{ url_for('signup') }}" method="POST" class="signup-form">
+        <label for="email" class="floating-label">Email</label>
+        <input type="email" name="email" id="email" required placeholder="Email" class="form-input">
+
+        <label for="username" class="floating-label">Username</label>
+        <input type="text" name="username" id="username" required placeholder="Username" class="form-input">
+
+        <label for="password" class="floating-label">Password</label>
+        <input type="password" name="password" id="password" required placeholder="Password" class="form-input">
+
+        <button type="submit" class="button signup-btn">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="{{ url_for('login') }}" class="login-link">Login here</a></p>
+</section>
+{% endblock %}

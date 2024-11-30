@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="live-tracking">
+    <h1 class="section-title">Live Crypto Data</h1>
+    <div class="live-data">
+        <div class="crypto-price">
+            <h2>Ethereum (ETH)</h2>
+            <p>Price: <strong>${{ eth_price }}</strong></p>
+            <button class="button track-btn">Track More</button>
+        </div>
+        <div class="crypto-price">
+            <h2>Bitcoin (BTC)</h2>
+            <p>Price: <strong>${{ btc_price }}</strong></p>
+            <button class="button track-btn">Track More</button>
+        </div>
+    </div>
+</section>
+{% endblock %}
