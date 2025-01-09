@@ -1,59 +1,70 @@
 /* General Layout */
 body {
     font-family: 'Poppins', sans-serif;
-    background: #f3f5f9;
-    color: #333;
+    background-color: #f4faff; /* Light blue background */
+    color: #333; /* Black text */
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
 a {
     text-decoration: none;
+    color: #007bff; /* Light blue links */
 }
 
-button {
-    cursor: pointer;
+a:hover {
+    color: #0056b3; /* Darker blue on hover */
 }
 
 /* Header & Navbar */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+    background-color: #2b6cb0;
+    overflow: hidden; /* Ensures no horizontal overflow */
+    white-space: nowrap; /* Prevents items from wrapping unnecessarily */
+    width: 100%;
+    box-sizing: border-box; /* Includes padding and border in width */}
+
+        .navbar-brand {
+    color: #fff;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden; /* Truncates overflowing text */
+    white-space: nowrap;}
+
+        .nav-link {
+    color: #fff;
+    white-space: nowrap; /* Prevents wrapping */}
 
 .navbar .logo a {
-    font-size: 24px;
-    color: #007bff;
-    font-weight: bold;
+    font-size: 30px;
+    color: #007bff; /* Light blue logo */
+    font-weight: 700;
 }
 
 .navbar .nav-links a {
-    margin: 0 15px;
+    margin: 0 20px;
     font-size: 18px;
-    color: #333;
+    color: #333; /* Black text for nav links */
     transition: color 0.3s ease;
 }
 
 .navbar .nav-links a:hover {
-    color: #007bff;
+    color: #007bff; /* Light blue on hover */
 }
 
-button {
+.navbar .cta-button {
     background-color: #007bff;
     color: white;
-    padding: 12px 25px;
-    border-radius: 5px;
-    border: none;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
-button:hover {
+.navbar .cta-button:hover {
     background-color: #0056b3;
+    transform: translateY(-5px);
 }
 
 /* Hero Section */
@@ -66,27 +77,29 @@ button:hover {
     height: 100vh;
     text-align: center;
     padding: 0 20px;
+    animation: fadeIn 2s ease;
 }
 
-.hero-title {
+.hero-text h1 {
     font-size: 60px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
 }
 
-.hero-description {
-    font-size: 20px;
-    margin-bottom: 30px;
+.hero-text p {
+    font-size: 22px;
+    margin-bottom: 20px;
 }
 
 .cta-buttons a {
     font-size: 18px;
     margin: 10px;
     padding: 15px 30px;
-    border-radius: 50px;
+    border-radius: 25px;
     background-color: #ffffff;
     color: #007bff;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .cta-buttons a:hover {
@@ -95,70 +108,105 @@ button:hover {
     transform: translateY(-5px);
 }
 
-/* Marketplace */
-.cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
-    padding: 50px 0;
+/* Features Section */
+.features {
+    background-color: white;
+    padding: 80px 20px;
+    text-align: center;
 }
 
-.card {
-    width: 300px;
+.features-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.feature-card {
     background-color: white;
+    width: 300px;
+    padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
-.card:hover {
-    transform: scale(1.05);
+.feature-card:hover {
+    transform: translateY(-10px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.card-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 15px 15px 0 0;
+.feature-card i {
+    font-size: 50px;
+    color: #007bff;
+    margin-bottom: 20px;
 }
 
-.card-body {
-    padding: 20px;
-}
-
-.card-title {
+.feature-card h3 {
     font-size: 22px;
-    font-weight: bold;
+    margin-bottom: 15px;
+    font-weight: 600;
 }
 
-.card-description {
+.feature-card p {
     font-size: 16px;
-    color: #666;
+    color: #555;
 }
 
-.card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-}
-
-.price {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.view-btn {
+/* Call to Action Section */
+.cta-section {
     background-color: #007bff;
     color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    transition: transform 0.3s ease;
+    padding: 50px 20px;
+    text-align: center;
 }
 
-.view-btn:hover {
+.cta-section h2 {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    background-color: white;
+    color: #007bff;
+    font-size: 18px;
+    padding: 15px 40px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
     background-color: #0056b3;
-    transform: scale(1.1);
+    color: white;
+    transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.social-links a {
+    color: white;
+    margin: 0 10px;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #007bff;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }

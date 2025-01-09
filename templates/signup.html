@@ -1,20 +1,132 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-<section class="auth">
-    <h1 class="section-title">Create an Account</h1>
-    <form action="{{ url_for('signup') }}" method="POST" class="signup-form">
-        <label for="email" class="floating-label">Email</label>
-        <input type="email" name="email" id="email" required placeholder="Email" class="form-input">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - WeBank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-decoration: bold;
+            background: linear-gradient(to bottom right, #f4faff, #e0f0ff);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
 
-        <label for="username" class="floating-label">Username</label>
-        <input type="text" name="username" id="username" required placeholder="Username" class="form-input">
+        .form-container {
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
 
-        <label for="password" class="floating-label">Password</label>
-        <input type="password" name="password" id="password" required placeholder="Password" class="form-input">
+        .form-container h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
 
-        <button type="submit" class="button signup-btn">Sign Up</button>
-    </form>
-    <p>Already have an account? <a href="{{ url_for('login') }}" class="login-link">Login here</a></p>
-</section>
-{% endblock %}
+        .btn-signup {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-signup:hover {
+            background-color: #0056b3;
+        }
+
+        .form-container a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .form-container a:hover {
+            color: #0056b3;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 0.9em;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Create Your Account</h2>
+        <form action="/signup" method="POST" onsubmit="return validateForm()">
+            <div class="mb-3">
+                <label for="username" class="form-label">Full Name</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Benjamin Carlton" required>
+                <small id="usernameError" class="error-message d-none">Please enter a valid name.</small>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="example@email.com" required>
+                <small id="emailError" class="error-message d-none">Please enter a valid email address.</small>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control"
+                    placeholder="Confirm Password" required>
+                <small id="passwordError" class="error-message d-none">Passwords do not match.</small>
+            </div>
+            <button type="submit" class="btn-signup">Sign Up</button>
+        </form>
+        <p class="mt-3 text-center">Already have an account? <a href="/login">Log In</a></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Clear existing errors
+            document.getElementById('usernameError').classList.add('d-none');
+            document.getElementById('emailError').classList.add('d-none');
+            document.getElementById('passwordError').classList.add('d-none');
+
+            let valid = true;
+
+            // Username validation
+            const username = document.getElementById('username').value.trim();
+            if (username.length < 3) {
+                document.getElementById('usernameError').classList.remove('d-none');
+                valid = false;
+            }
+
+            // Email validation
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').classList.remove('d-none');
+                valid = false;
+            }
+
+            // Password validation
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            if (password !== confirmPassword) {
+                document.getElementById('passwordError').classList.remove('d-none');
+                valid = false;
+            }
+
+            return valid;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeBank - Crypto Simplified</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/static/js/scripts.js" defer></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #f0f4fc, #d9e9fc);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: linear-gradient(100deg, #fafafa, dodgerblue);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            overflow-x: hidden;
+        
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #007bff;
+            text-decoration: none;
+            padding: 1rem 2rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            color: black;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        /* Overlay Animation */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6));
+            z-index: 1;
+            pointer-events: none;
+            animation: moveOverlay 10s linear infinite;
+        }
+
+        @keyframes moveOverlay {
+            0% {
+                transform: scale(1) translate(-50%, -50%);
+            }
+            50% {
+                transform: scale(1.5) translate(-40%, -40%);
+            }
+            100% {
+                transform: scale(1) translate(-50%, -50%);
+            }
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #007bff;
+            border: 2px solid #007bff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e6f0ff;
+        }
+
+        .features {
+            padding: 4rem 2rem;
+            background-color: white;
+            text-align: center;
+        }
+
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #007bff;
+        }
+
+        footer {
+            background: #1e90ff;
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            text-decoration: none;
+        }
+
+        .social-links a {
+            background: linear-gradient(to bottom right, #f0f4fc, #d9e9fc);
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #007bff;
+        }
+    </style>
+    
+<script>
+    // Fetch data on page load
+    async function fetchCryptoData(currency = "bitcoin", timeRange = 1) {
+        try {
+            const response = await fetch(`/api/crypto/${currency}/${timeRange}`);
+            const data = await response.json();
+            console.log(data); // Log the data for testing
+            // Here you can update your graphs/tables with the data
+        } catch (error) {
+            console.error("Error fetching crypto data:", error);
+        }
+    }
+
+    // Fetch data when the page loads
+    window.onload = () => {
+        fetchCryptoData("bitcoin", 1); // Example: Fetch Bitcoin data for 1 day
+    };
+</script>
+
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="/" class="logo">WeBank</a>
+        <ul class="nav-links">
+            <li><a href="/wallet">Wallet</a></li>
+            <li><a href="/nfts">NFTs</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/login" class="btn btn-login">Login</a></li>
+            <li><a href="/signup" class="btn btn-signup">Sign Up</a></li>
+        </ul>
+    </nav>
+
+       <!-- Hero Section -->
+       <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Welcome to WeBank</h1>
+            <h3> Buy, sell and trade cryptocurrencies and NFTs in our digital wallet and museum</h3>
+        </div>
+    </section>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Why Choose WeBank?</h2>
+        <div class="feature-cards">
+            <div class="card">
+                <i class="fas fa-wallet feature-icon"></i>
+                <h3>Secure Wallet</h3>
+                <p>Store and manage your cryptocurrency with top-notch security.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-palette feature-icon"></i>
+                <h3>NFT Marketplace</h3>
+                <p>Discover, buy, and sell NFTs with ease and transparency.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-chart-line feature-icon"></i>
+                <h3>Live Tracking</h3>
+                <p>Track cryptocurrency prices and trends in real-time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 WeBank. All rights reserved.</p>
+    </footer>
+</body>
+</html>

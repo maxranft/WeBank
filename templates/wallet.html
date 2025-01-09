@@ -1,22 +1,162 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WeBank Wallet - Connect and manage your wallet effortlessly.">
+  <title>WeBank Wallet</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #f0f4fc, #d9e9fc);
+      color: #333;
+    }
 
-{% block content %}
-<section class="wallet">
-    <h1 class="section-title">My Crypto Wallet</h1>
-    <div class="wallet-summary">
-        <p>Balance: <strong>{{ user_balance }} BTC</strong></p>
-        <a href="{{ url_for('wallet') }}" class="button">Deposit Funds</a>
-        <a href="{{ url_for('wallet') }}" class="button">Withdraw Funds</a>
-    </div>
-    <div class="transaction-history">
-        <h2>Recent Transactions</h2>
-        <ul>
-            {% for transaction in transactions %}
-            <li class="transaction">
-                <span>{{ transaction.date }}</span> - <span>{{ transaction.amount }} BTC</span> - <span>{{ transaction.status }}</span>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</section>
-{% endblock %}
+    .navbar {
+      background: linear-gradient(100deg, #fafafa, dodgerblue);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #007bff;
+    }
+
+    .wallet-section {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .wallet-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .wallet-section p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    #connect-wallet {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #connect-wallet:hover {
+      background-color: #0056b3;
+    }
+
+    #wallet-address {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: #007bff;
+    }
+
+    footer {
+      background: #1e90ff;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="/" class="logo" aria-label="WeBank Home">WeBank</a>
+      <ul class="nav-links" aria-label="Main Navigation">
+        <li><a href="/wallet">Wallet</a></li>
+        <li><a href="/nfts">NFTs</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/signup">Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wallet-section">
+      <h1>Your Wallet</h1>
+      <p id="wallet-message">Connect your wallet to get started.</p>
+      <button id="connect-wallet">Connect MetaMask</button>
+      <p id="wallet-address" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 WeBank. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const connectWalletButton = document.getElementById("connect-wallet");
+    const walletMessage = document.getElementById("wallet-message");
+    const walletAddressElement = document.getElementById("wallet-address");
+
+    async function connectToMetaMask() {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          walletAddressElement.textContent = `Connected: ${accounts[0]}`;
+          walletMessage.textContent = "Wallet connected successfully.";
+          walletMessage.style.color = "green";
+        } catch (error) {
+          walletAddressElement.textContent = "Connection failed.";
+          walletMessage.textContent = "Failed to connect to wallet. Please try again.";
+          walletMessage.style.color = "red";
+          console.error(error);
+        }
+      } else {
+        walletMessage.textContent = "MetaMask not detected. Please install it to proceed.";
+        walletMessage.style.color = "red";
+      }
+    }
+
+    connectWalletButton.addEventListener("click", connectToMetaMask);
+  </script>
+</body>
+</html>
